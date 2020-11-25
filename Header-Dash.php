@@ -308,6 +308,11 @@ if (!isset($_SESSION['STATUS'])) {
                                                         </a>
                                                     </li>
                                                     <li class="">
+                                                        <a href="mPerusahaan.php" class="waves-effect waves-dark">
+                                                            <span class="pcoded-mtext">Data Perusahaan</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="">
                                                         <a href="mDataToko.php" class="waves-effect waves-dark">
                                                             <span class="pcoded-mtext">Data Toko</span>
                                                         </a>

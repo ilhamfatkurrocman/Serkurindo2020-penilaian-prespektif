@@ -247,7 +247,7 @@ error_reporting(0);
                                                         <center><?php echo @$data['prMinggu']; ?></center>
                                                     </td>
                                                     <td>
-                                                        <center><?php echo  $bul, $data['prTahun']; ?></center>
+                                                        <center><?php echo $bul, $data['prTahun']; ?></center>
                                                     </td>
 
                                                     <td style="padding-top:10px; padding-bottom:10px;">

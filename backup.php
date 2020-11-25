@@ -207,7 +207,7 @@ error_reporting(0);
                                                     $jmlPenjualanBarang2 = $data['qPenjualanm2'];
                                                     $jmlPenjualanBarang3 = $data['qPenjualanm3'];
                                                     $jmlPenjualanBarang4 = $data['qPenjualanm4'];
-                                        
+
 
                                                     if ($_GET['minggu'] == 'm1') {
                                                         $hasilPenjualan = 0;
@@ -301,7 +301,7 @@ error_reporting(0);
                                                                                         <div class="input-group">
                                                                                             <input type="hidden" value="<?php echo $data['took']; ?>" name="ID_TOKO">
                                                                                             <input type="hidden" value="<?php echo $m ?>" name="MINGGU">
-                                                                                            <input type="text" class="form-control form-control-center" placeholder="0" name="PERTUMBUHAN" value="<?php echo $hasilPenjualan; 
+                                                                                            <input type="text" class="form-control form-control-center" placeholder="0" name="PERTUMBUHAN" value="<?php echo $hasilPenjualan;
                                                                                                                                                                                                             ?>" readonly>
                                                                                             <span class="input-group-append" id="basic-addon2">
                                                                                                 <label class="input-group-text">%</label>
