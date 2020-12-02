@@ -21,11 +21,11 @@ error_reporting(0);
                             </div>
                             <div class="card-block">
                                 <div class="dt-responsive table-responsive">
-                                    <table id="order-table" class="table table-striped table-bordered nowrap">
+                                    <table id="order-table0" class="table table-striped table-bordered nowrap">
                                         <thead>
                                             <tr>
                                                 <th>
-                                                    <center>ID</center>
+                                                    <center>No</center>
                                                 </th>
                                                 <th>
                                                     <center>Nama Toko</center>
@@ -50,33 +50,79 @@ error_reporting(0);
                                         <tbody>
                                             <?php
 
-                                            ?>
-                                            <tr>
+                                            $pres01 = "SELECT a.ID_TOKO as took, a.NAMA_TOKO, a.ALAMAT_TOKO, SUBSTRING(b.PERIODE_PERHITUNGAN, -2) AS prBulan, SUBSTRING(b.PERIODE_PERHITUNGAN, 12, 5) AS prTahun,
+                                                                (SELECT NILAI_K1
+                                                                    FROM NILAI_PERHITUNGAN
+                                                                    WHERE ID_TOKO = took AND SUBSTRING(PERIODE_PERHITUNGAN, 1, 11) LIKE '%Minggu Ke-1%') as n1,
+                                                                (SELECT NILAI_K1
+                                                                    FROM NILAI_PERHITUNGAN
+                                                                    WHERE ID_TOKO = took AND SUBSTRING(PERIODE_PERHITUNGAN, 1, 11) LIKE '%Minggu Ke-2%') as n2,
+                                                                (SELECT NILAI_K1
+                                                                    FROM NILAI_PERHITUNGAN
+                                                                    WHERE ID_TOKO = took AND SUBSTRING(PERIODE_PERHITUNGAN, 1, 11) LIKE '%Minggu Ke-3%') as n3,
+                                                                (SELECT NILAI_K1
+                                                                    FROM NILAI_PERHITUNGAN
+                                                                    WHERE ID_TOKO = took AND SUBSTRING(PERIODE_PERHITUNGAN, 1, 11) LIKE '%Minggu Ke-4%') as n4
+                                                            FROM DAFTAR_TOKO a JOIN NILAI_PERHITUNGAN b ON a.ID_TOKO = b.ID_TOKO
+                                                            GROUP BY a.ID_TOKO, SUBSTRING(b.PERIODE_PERHITUNGAN, -2)";
+                                            $hasilPres01 = mysqli_query($con, $pres01);
+                                            $no01 = 1;
+                                            while ($data01 = mysqli_fetch_array($hasilPres01)) {
 
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                            </tr>
+                                                if ($data01['prBulan'] == 01) {
+                                                    $bul = 'Januari';
+                                                } elseif ($data01['prBulan'] == 02) {
+                                                    $bul = 'Februari';
+                                                } elseif ($data01['prBulan'] == 03) {
+                                                    $bul = 'Maret';
+                                                } elseif ($data01['prBulan'] == 04) {
+                                                    $bul = 'April';
+                                                } elseif ($data01['prBulan'] == 05) {
+                                                    $bul = 'Mei';
+                                                } elseif ($data01['prBulan'] == 06) {
+                                                    $bul = 'Juni';
+                                                } elseif ($data01['prBulan'] == 07) {
+                                                    $bul = 'Juli';
+                                                } elseif ($data01['prBulan'] == '08') {
+                                                    $bul = 'Agustus';
+                                                } elseif ($data01['prBulan'] == '09') {
+                                                    $bul = 'September';
+                                                } elseif ($data01['prBulan'] == 10) {
+                                                    $bul = 'Oktober';
+                                                } elseif ($data01['prBulan'] == 11) {
+                                                    $bul = 'November';
+                                                } elseif ($data01['prBulan'] == 12) {
+                                                    $bul = 'Desember';
+                                                }
+
+                                                ?>
+                                                <tr>
+
+                                                    <td>
+                                                        <center><?php echo $no01; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo $data01['NAMA_TOKO']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $data01['n1']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $data01['n2']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $data01['n3']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $data01['n4']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $bul, $data01['prTahun']; ?></center>
+                                                    </td>
+                                                </tr>
                                             <?php
-
+                                                $no01++;
+                                            }
                                             ?>
                                         </tbody>
                                     </table>
@@ -101,7 +147,7 @@ error_reporting(0);
                                         <thead>
                                             <tr>
                                                 <th>
-                                                    <center>ID</center>
+                                                    <center>No</center>
                                                 </th>
                                                 <th>
                                                     <center>Nama Toko</center>
@@ -125,34 +171,53 @@ error_reporting(0);
                                         </thead>
                                         <tbody>
                                             <?php
+                                            $pres02 = "SELECT a.ID_TOKO as took, a.NAMA_TOKO, a.ALAMAT_TOKO, SUBSTRING(b.PERIODE_PERHITUNGAN, -2) AS prBulan, SUBSTRING(b.PERIODE_PERHITUNGAN, 12, 5) AS prTahun,
+                                                            (SELECT NILAI_K2
+                                                                FROM NILAI_PERHITUNGAN
+                                                                WHERE ID_TOKO = took AND SUBSTRING(PERIODE_PERHITUNGAN, 1, 11) LIKE '%Minggu Ke-1%') as n1,
+                                                            (SELECT NILAI_K2
+                                                                FROM NILAI_PERHITUNGAN
+                                                                WHERE ID_TOKO = took AND SUBSTRING(PERIODE_PERHITUNGAN, 1, 11) LIKE '%Minggu Ke-2%') as n2,
+                                                            (SELECT NILAI_K2
+                                                                FROM NILAI_PERHITUNGAN
+                                                                WHERE ID_TOKO = took AND SUBSTRING(PERIODE_PERHITUNGAN, 1, 11) LIKE '%Minggu Ke-3%') as n3,
+                                                            (SELECT NILAI_K2
+                                                                FROM NILAI_PERHITUNGAN
+                                                                WHERE ID_TOKO = took AND SUBSTRING(PERIODE_PERHITUNGAN, 1, 11) LIKE '%Minggu Ke-4%') as n4
+                                                        FROM DAFTAR_TOKO a JOIN NILAI_PERHITUNGAN b ON a.ID_TOKO = b.ID_TOKO
+                                                        GROUP BY a.ID_TOKO, SUBSTRING(b.PERIODE_PERHITUNGAN, -2)";
+                                            $hasilPres02 = mysqli_query($con, $pres02);
+                                            $no02 = 1;
+                                            while ($data02 = mysqli_fetch_array($hasilPres02)) {
 
-                                            ?>
-                                            <tr>
+                                                ?>
+                                                <tr>
 
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                            </tr>
+                                                    <td>
+                                                        <center><?php echo $no02; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo $data02['NAMA_TOKO']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $data02['n1']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $data02['n2']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $data02['n3']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $data02['n4']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $bul, $data02['prTahun']; ?></center>
+                                                    </td>
+                                                </tr>
                                             <?php
-
+                                                $no02++;
+                                            }
                                             ?>
                                         </tbody>
                                     </table>
@@ -173,7 +238,7 @@ error_reporting(0);
                                         <thead>
                                             <tr>
                                                 <th>
-                                                    <center>ID</center>
+                                                    <center>No</center>
                                                 </th>
                                                 <th>
                                                     <center>Nama Toko</center>
@@ -197,34 +262,79 @@ error_reporting(0);
                                         </thead>
                                         <tbody>
                                             <?php
+                                            $pres03 = "SELECT a.ID_TOKO as took, a.NAMA_TOKO, a.ALAMAT_TOKO, SUBSTRING(b.PERIODE_PERHITUNGAN, -2) AS prBulan, SUBSTRING(b.PERIODE_PERHITUNGAN, 12, 5) AS prTahun,
+                                                                (SELECT NILAI_K3
+                                                                    FROM NILAI_PERHITUNGAN
+                                                                    WHERE ID_TOKO = took AND SUBSTRING(PERIODE_PERHITUNGAN, 1, 11) LIKE '%Minggu Ke-1%') as n1,
+                                                                (SELECT NILAI_K3
+                                                                    FROM NILAI_PERHITUNGAN
+                                                                    WHERE ID_TOKO = took AND SUBSTRING(PERIODE_PERHITUNGAN, 1, 11) LIKE '%Minggu Ke-2%') as n2,
+                                                                (SELECT NILAI_K3
+                                                                    FROM NILAI_PERHITUNGAN
+                                                                    WHERE ID_TOKO = took AND SUBSTRING(PERIODE_PERHITUNGAN, 1, 11) LIKE '%Minggu Ke-3%') as n3,
+                                                                (SELECT NILAI_K3
+                                                                    FROM NILAI_PERHITUNGAN
+                                                                    WHERE ID_TOKO = took AND SUBSTRING(PERIODE_PERHITUNGAN, 1, 11) LIKE '%Minggu Ke-4%') as n4
+                                                            FROM DAFTAR_TOKO a JOIN NILAI_PERHITUNGAN b ON a.ID_TOKO = b.ID_TOKO
+                                                            GROUP BY a.ID_TOKO, SUBSTRING(b.PERIODE_PERHITUNGAN, -2)";
+                                            $hasilPres03 = mysqli_query($con, $pres03);
+                                            $no03 = 1;
+                                            while ($data03 = mysqli_fetch_array($hasilPres03)) {
 
-                                            ?>
-                                            <tr>
+                                                if ($data03['prBulan'] == 01) {
+                                                    $bul = 'Januari';
+                                                } elseif ($data03['prBulan'] == 02) {
+                                                    $bul = 'Februari';
+                                                } elseif ($data03['prBulan'] == 03) {
+                                                    $bul = 'Maret';
+                                                } elseif ($data03['prBulan'] == 04) {
+                                                    $bul = 'April';
+                                                } elseif ($data03['prBulan'] == 05) {
+                                                    $bul = 'Mei';
+                                                } elseif ($data03['prBulan'] == 06) {
+                                                    $bul = 'Juni';
+                                                } elseif ($data03['prBulan'] == 07) {
+                                                    $bul = 'Juli';
+                                                } elseif ($data03['prBulan'] == '08') {
+                                                    $bul = 'Agustus';
+                                                } elseif ($data03['prBulan'] == '09') {
+                                                    $bul = 'September';
+                                                } elseif ($data03['prBulan'] == 10) {
+                                                    $bul = 'Oktober';
+                                                } elseif ($data03['prBulan'] == 11) {
+                                                    $bul = 'November';
+                                                } elseif ($data03['prBulan'] == 12) {
+                                                    $bul = 'Desember';
+                                                }
 
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                            </tr>
+                                                ?>
+                                                <tr>
+
+                                                    <td>
+                                                        <center><?php echo $no03; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo $data03['NAMA_TOKO']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $data03['n1']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $data03['n2']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $data03['n3']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $data03['n4']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $bul, $data03['prTahun']; ?></center>
+                                                    </td>
+                                                </tr>
                                             <?php
-
+                                                $no03++;
+                                            }
                                             ?>
                                         </tbody>
                                     </table>
@@ -249,7 +359,7 @@ error_reporting(0);
                                         <thead>
                                             <tr>
                                                 <th>
-                                                    <center>ID</center>
+                                                    <center>No</center>
                                                 </th>
                                                 <th>
                                                     <center>Nama Toko</center>
@@ -273,34 +383,79 @@ error_reporting(0);
                                         </thead>
                                         <tbody>
                                             <?php
+                                            $pres04 = "SELECT a.ID_TOKO as took, a.NAMA_TOKO, a.ALAMAT_TOKO, SUBSTRING(b.PERIODE_PERHITUNGAN, -2) AS prBulan, SUBSTRING(b.PERIODE_PERHITUNGAN, 12, 5) AS prTahun,
+                                                                (SELECT NILAI_K4
+                                                                    FROM NILAI_PERHITUNGAN
+                                                                    WHERE ID_TOKO = took AND SUBSTRING(PERIODE_PERHITUNGAN, 1, 11) LIKE '%Minggu Ke-1%') as n1,
+                                                                (SELECT NILAI_K4
+                                                                    FROM NILAI_PERHITUNGAN
+                                                                    WHERE ID_TOKO = took AND SUBSTRING(PERIODE_PERHITUNGAN, 1, 11) LIKE '%Minggu Ke-2%') as n2,
+                                                                (SELECT NILAI_K4
+                                                                    FROM NILAI_PERHITUNGAN
+                                                                    WHERE ID_TOKO = took AND SUBSTRING(PERIODE_PERHITUNGAN, 1, 11) LIKE '%Minggu Ke-3%') as n3,
+                                                                (SELECT NILAI_K4
+                                                                    FROM NILAI_PERHITUNGAN
+                                                                    WHERE ID_TOKO = took AND SUBSTRING(PERIODE_PERHITUNGAN, 1, 11) LIKE '%Minggu Ke-4%') as n4
+                                                            FROM DAFTAR_TOKO a JOIN NILAI_PERHITUNGAN b ON a.ID_TOKO = b.ID_TOKO
+                                                            GROUP BY a.ID_TOKO, SUBSTRING(b.PERIODE_PERHITUNGAN, -2)";
+                                            $hasilPres04 = mysqli_query($con, $pres04);
+                                            $no04 = 1;
+                                            while ($data04 = mysqli_fetch_array($hasilPres04)) {
 
-                                            ?>
-                                            <tr>
+                                                if ($data04['prBulan'] == 01) {
+                                                    $bul = 'Januari';
+                                                } elseif ($data04['prBulan'] == 02) {
+                                                    $bul = 'Februari';
+                                                } elseif ($data04['prBulan'] == 03) {
+                                                    $bul = 'Maret';
+                                                } elseif ($data04['prBulan'] == 04) {
+                                                    $bul = 'April';
+                                                } elseif ($data04['prBulan'] == 05) {
+                                                    $bul = 'Mei';
+                                                } elseif ($data04['prBulan'] == 06) {
+                                                    $bul = 'Juni';
+                                                } elseif ($data04['prBulan'] == 07) {
+                                                    $bul = 'Juli';
+                                                } elseif ($data04['prBulan'] == '08') {
+                                                    $bul = 'Agustus';
+                                                } elseif ($data04['prBulan'] == '09') {
+                                                    $bul = 'September';
+                                                } elseif ($data04['prBulan'] == 10) {
+                                                    $bul = 'Oktober';
+                                                } elseif ($data04['prBulan'] == 11) {
+                                                    $bul = 'November';
+                                                } elseif ($data04['prBulan'] == 12) {
+                                                    $bul = 'Desember';
+                                                }
 
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                            </tr>
+                                                ?>
+                                                <tr>
+
+                                                    <td>
+                                                        <center><?php echo $no04; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo $data04['NAMA_TOKO']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $data04['n1']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $data04['n2']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $data04['n3']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $data04['n4']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $bul, $data04['prTahun']; ?></center>
+                                                    </td>
+                                                </tr>
                                             <?php
-
+                                                $no04++;
+                                            }
                                             ?>
                                         </tbody>
                                     </table>
@@ -321,7 +476,7 @@ error_reporting(0);
                                         <thead>
                                             <tr>
                                                 <th>
-                                                    <center>ID</center>
+                                                    <center>No</center>
                                                 </th>
                                                 <th>
                                                     <center>Nama Toko</center>
@@ -345,34 +500,79 @@ error_reporting(0);
                                         </thead>
                                         <tbody>
                                             <?php
+                                            $pres05 = "SELECT a.ID_TOKO as took, a.NAMA_TOKO, a.ALAMAT_TOKO, SUBSTRING(b.PERIODE_PERHITUNGAN, -2) AS prBulan, SUBSTRING(b.PERIODE_PERHITUNGAN, 12, 5) AS prTahun,
+                                                                (SELECT NILAI_K5
+                                                                    FROM NILAI_PERHITUNGAN
+                                                                    WHERE ID_TOKO = took AND SUBSTRING(PERIODE_PERHITUNGAN, 1, 11) LIKE '%Minggu Ke-1%') as n1,
+                                                                (SELECT NILAI_K5
+                                                                    FROM NILAI_PERHITUNGAN
+                                                                    WHERE ID_TOKO = took AND SUBSTRING(PERIODE_PERHITUNGAN, 1, 11) LIKE '%Minggu Ke-2%') as n2,
+                                                                (SELECT NILAI_K5
+                                                                    FROM NILAI_PERHITUNGAN
+                                                                    WHERE ID_TOKO = took AND SUBSTRING(PERIODE_PERHITUNGAN, 1, 11) LIKE '%Minggu Ke-3%') as n3,
+                                                                (SELECT NILAI_K5
+                                                                    FROM NILAI_PERHITUNGAN
+                                                                    WHERE ID_TOKO = took AND SUBSTRING(PERIODE_PERHITUNGAN, 1, 11) LIKE '%Minggu Ke-4%') as n4
+                                                            FROM DAFTAR_TOKO a JOIN NILAI_PERHITUNGAN b ON a.ID_TOKO = b.ID_TOKO
+                                                            GROUP BY a.ID_TOKO, SUBSTRING(b.PERIODE_PERHITUNGAN, -2)";
+                                            $hasilPres05 = mysqli_query($con, $pres05);
+                                            $no05 = 1;
+                                            while ($data05 = mysqli_fetch_array($hasilPres05)) {
 
-                                            ?>
-                                            <tr>
+                                                if ($data05['prBulan'] == 01) {
+                                                    $bul = 'Januari';
+                                                } elseif ($data05['prBulan'] == 02) {
+                                                    $bul = 'Februari';
+                                                } elseif ($data05['prBulan'] == 03) {
+                                                    $bul = 'Maret';
+                                                } elseif ($data05['prBulan'] == 04) {
+                                                    $bul = 'April';
+                                                } elseif ($data05['prBulan'] == 05) {
+                                                    $bul = 'Mei';
+                                                } elseif ($data05['prBulan'] == 06) {
+                                                    $bul = 'Juni';
+                                                } elseif ($data05['prBulan'] == 07) {
+                                                    $bul = 'Juli';
+                                                } elseif ($data05['prBulan'] == '08') {
+                                                    $bul = 'Agustus';
+                                                } elseif ($data05['prBulan'] == '09') {
+                                                    $bul = 'September';
+                                                } elseif ($data05['prBulan'] == 10) {
+                                                    $bul = 'Oktober';
+                                                } elseif ($data05['prBulan'] == 11) {
+                                                    $bul = 'November';
+                                                } elseif ($data05['prBulan'] == 12) {
+                                                    $bul = 'Desember';
+                                                }
 
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                                <td>
-                                                    <center></center>
-                                                </td>
-                                            </tr>
+                                                ?>
+                                                <tr>
+
+                                                    <td>
+                                                        <center><?php echo $no05; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo $data05['NAMA_TOKO']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $data05['n1']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $data05['n2']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $data05['n3']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $data05['n4']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $bul, $data05['prTahun']; ?></center>
+                                                    </td>
+                                                </tr>
                                             <?php
-
+                                                $no05++;
+                                            }
                                             ?>
                                         </tbody>
                                     </table>
@@ -397,7 +597,7 @@ error_reporting(0);
                                         <thead>
                                             <tr>
                                                 <th>
-                                                    <center>ID</center>
+                                                    <center>No</center>
                                                 </th>
                                                 <th>
                                                     <center>Nama Toko</center>
@@ -421,47 +621,78 @@ error_reporting(0);
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $tNilai6 = "SELECT ID_TOKO as took, NAMA_TOKO, 
-                                                                (SELECT NILAI_K4
-                                                                    FROM NILAI_PERHITUNGAN
-                                                                    WHERE ID_TOKO = took) as n4,
-                                                                (SELECT NILAI_K5
-                                                                    FROM NILAI_PERHITUNGAN
-                                                                    WHERE ID_TOKO = took) as n5,
+                                            $pres06 = "SELECT a.ID_TOKO as took, a.NAMA_TOKO, a.ALAMAT_TOKO, SUBSTRING(b.PERIODE_PERHITUNGAN, -2) AS prBulan, SUBSTRING(b.PERIODE_PERHITUNGAN, 12, 5) AS prTahun,
                                                                 (SELECT NILAI_K6
                                                                     FROM NILAI_PERHITUNGAN
-                                                                    WHERE ID_TOKO = took) as n6
-                                                            FROM DAFTAR_TOKO";
-                                            $hasil6 = mysqli_query($con, $tNilai6);
-                                            $no = 1;
-                                            while ($data6 = mysqli_fetch_array($hasil6)) {
+                                                                    WHERE ID_TOKO = took AND SUBSTRING(PERIODE_PERHITUNGAN, 1, 11) LIKE '%Minggu Ke-1%') as n1,
+                                                                (SELECT NILAI_K6
+                                                                    FROM NILAI_PERHITUNGAN
+                                                                    WHERE ID_TOKO = took AND SUBSTRING(PERIODE_PERHITUNGAN, 1, 11) LIKE '%Minggu Ke-2%') as n2,
+                                                                (SELECT NILAI_K6
+                                                                    FROM NILAI_PERHITUNGAN
+                                                                    WHERE ID_TOKO = took AND SUBSTRING(PERIODE_PERHITUNGAN, 1, 11) LIKE '%Minggu Ke-3%') as n3,
+                                                                (SELECT NILAI_K6
+                                                                    FROM NILAI_PERHITUNGAN
+                                                                    WHERE ID_TOKO = took AND SUBSTRING(PERIODE_PERHITUNGAN, 1, 11) LIKE '%Minggu Ke-4%') as n4
+                                                            FROM DAFTAR_TOKO a JOIN NILAI_PERHITUNGAN b ON a.ID_TOKO = b.ID_TOKO
+                                                            GROUP BY a.ID_TOKO, SUBSTRING(b.PERIODE_PERHITUNGAN, -2)";
+                                            $hasilPres06 = mysqli_query($con, $pres06);
+                                            $no06 = 1;
+                                            while ($data06 = mysqli_fetch_array($hasilPres06)) {
+
+                                                if ($data06['prBulan'] == 01) {
+                                                    $bul = 'Januari';
+                                                } elseif ($data06['prBulan'] == 02) {
+                                                    $bul = 'Februari';
+                                                } elseif ($data06['prBulan'] == 03) {
+                                                    $bul = 'Maret';
+                                                } elseif ($data06['prBulan'] == 04) {
+                                                    $bul = 'April';
+                                                } elseif ($data06['prBulan'] == 05) {
+                                                    $bul = 'Mei';
+                                                } elseif ($data06['prBulan'] == 06) {
+                                                    $bul = 'Juni';
+                                                } elseif ($data06['prBulan'] == 07) {
+                                                    $bul = 'Juli';
+                                                } elseif ($data06['prBulan'] == '08') {
+                                                    $bul = 'Agustus';
+                                                } elseif ($data06['prBulan'] == '09') {
+                                                    $bul = 'September';
+                                                } elseif ($data06['prBulan'] == 10) {
+                                                    $bul = 'Oktober';
+                                                } elseif ($data06['prBulan'] == 11) {
+                                                    $bul = 'November';
+                                                } elseif ($data06['prBulan'] == 12) {
+                                                    $bul = 'Desember';
+                                                }
+
                                                 ?>
                                                 <tr>
 
                                                     <td>
-                                                        <center><?php echo $no; ?></center>
+                                                        <center><?php echo $no06; ?></center>
                                                     </td>
                                                     <td>
-                                                        <?php echo @$data6['NAMA_TOKO']; ?>
+                                                        <?php echo $data06['NAMA_TOKO']; ?>
                                                     </td>
                                                     <td>
-                                                        <center><?php echo @$data6['n2']; ?></center>
+                                                        <center><?php echo $data06['n1']; ?></center>
                                                     </td>
                                                     <td>
-                                                        <center><?php echo @$data6['n3']; ?></center>
+                                                        <center><?php echo $data06['n2']; ?></center>
                                                     </td>
                                                     <td>
-                                                        <center><?php echo @$data6['n4']; ?></center>
+                                                        <center><?php echo $data06['n3']; ?></center>
                                                     </td>
                                                     <td>
-                                                        <center><?php echo @$data6['n5']; ?></center>
+                                                        <center><?php echo $data06['n4']; ?></center>
                                                     </td>
                                                     <td>
-                                                        <center><?php echo @$data6['pTahun']; ?></center>
+                                                        <center><?php echo $bul, $data06['prTahun']; ?></center>
                                                     </td>
                                                 </tr>
                                             <?php
-                                                $no++;
+                                                $no06++;
                                             }
                                             ?>
                                         </tbody>
@@ -469,8 +700,8 @@ error_reporting(0);
                                 </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
         </div>

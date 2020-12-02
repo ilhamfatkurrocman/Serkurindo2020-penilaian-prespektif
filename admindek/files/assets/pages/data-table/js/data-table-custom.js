@@ -40,44 +40,49 @@ $('#order-table').DataTable({
         [3, "desc"]
     ]
 });
+$('#order-table0').DataTable({
+    "order": [
+        [0, "asc"]
+    ]
+});
 $('#order-table1').DataTable({
     "order": [
-        [3, "desc"]
+        [0, "asc"]
     ]
 });
 $('#order-table2').DataTable({
     "order": [
-        [3, "desc"]
+        [0, "asc"]
     ]
 });
 $('#order-table3').DataTable({
     "order": [
-        [3, "desc"]
+        [0, "asc"]
     ]
 });
 $('#order-table4').DataTable({
     "order": [
-        [3, "desc"]
+        [0, "asc"]
     ]
 });
 $('#order-table5').DataTable({
     "order": [
-        [3, "desc"]
+        [0, "asc"]
     ]
 });
 $('#order-table6').DataTable({
     "order": [
-        [3, "desc"]
+        [0, "asc"]
     ]
 });
 $('#order-table7').DataTable({
     "order": [
-        [3, "desc"]
+        [0, "asc"]
     ]
 });
 $('#order-table8').DataTable({
     "order": [
-        [3, "desc"]
+        [0, "asc"]
     ]
 });
 $('#multi-colum-dt').DataTable({
