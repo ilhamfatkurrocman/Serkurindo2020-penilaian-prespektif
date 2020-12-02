@@ -37,13 +37,39 @@ error_reporting(0);
                                         <tbody>
                                             <?php
 
-                                            $queryShow = "SELECT a.ID_TOKO, b.NAMA_TOKO, a.PERIODE_PERHITUNGAN
+                                            $queryShow = "SELECT a.ID_TOKO, b.NAMA_TOKO, SUBSTRING(a.PERIODE_PERHITUNGAN, -2) AS prBulan,  SUBSTRING(a.PERIODE_PERHITUNGAN, 12, 5) AS prTahun
                                                         FROM NILAI_PERHITUNGAN a JOIN DAFTAR_TOKO b ON a.ID_TOKO = b.ID_TOKO
                                                         GROUP BY a.ID_TOKO";
 
                                             $hasilShow = mysqli_query($con, $queryShow);
                                             // $noShow = 1;
                                             while ($data = mysqli_fetch_array($hasilShow)) {
+
+                                                 if ($data['prBulan'] == 01) {
+                                                    $bul = 'Januari';
+                                                } elseif ($data['prBulan'] == 02) {
+                                                    $bul = 'Februari';
+                                                } elseif ($data['prBulan'] == 03) {
+                                                    $bul = 'Maret';
+                                                } elseif ($data['prBulan'] == 04) {
+                                                    $bul = 'April';
+                                                } elseif ($data['prBulan'] == 05) {
+                                                    $bul = 'Mei';
+                                                } elseif ($data['prBulan'] == 06) {
+                                                    $bul = 'Juni';
+                                                } elseif ($data['prBulan'] == 07) {
+                                                    $bul = 'Juli';
+                                                } elseif ($data['prBulan'] == '08') {
+                                                    $bul = 'Agustus';
+                                                } elseif ($data['prBulan'] == '09') {
+                                                    $bul = 'September';
+                                                } elseif ($data['prBulan'] == 10) {
+                                                    $bul = 'Oktober';
+                                                } elseif ($data['prBulan'] == 11) {
+                                                    $bul = 'November';
+                                                } elseif ($data['prBulan'] == 12) {
+                                                    $bul = 'Desember';
+                                                }
 
 
                                                 ?>
@@ -60,7 +86,7 @@ error_reporting(0);
                                                         <?php echo $data['NAMA_TOKO']; ?>
                                                     </td>
                                                     <td>
-                                                        <center><?php echo $data['PERIODE_PERHITUNGAN']; ?></center>
+                                                        <center><?php echo $bul, $data['prTahun']; ?></center>
                                                     </td>
                                                     <td style="padding-top:10px; padding-bottom:10px;">
                                                         <center>

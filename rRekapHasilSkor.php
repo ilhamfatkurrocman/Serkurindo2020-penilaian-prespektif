@@ -25,7 +25,13 @@ error_reporting(0);
                                                     <center>Nama Toko</center>
                                                 </th>
                                                 <th>
+                                                    <center>Alamat</center>
+                                                </th>
+                                                <th>
                                                     <center>Hasil Skor</center>
+                                                </th>
+                                                <th>
+                                                    <center>Periode</center>
                                                 </th>
 
                                             </tr>
@@ -33,18 +39,21 @@ error_reporting(0);
                                         <tbody>
                                             <?php
 
-                                                @$tampil1 = "SELECT a.ID_PENILAIAN, b.NAMA_TOKO, b.ALAMAT_TOKO 
-                                                            FROM DAFTAR_TOKO b JOIN NILAI_PERHITUNGAN a ON a.ID_TOKO = b.ID_TOKO";
-                                                $hasil = mysqli_query($con, $tampil1);
-                                                $no = 1;
-                                                while ($data = mysqli_fetch_array($hasil)) {
+                                            @$tampil1 = "SELECT a.ID_PENILAIAN_KRITERIA, b.NAMA_TOKO, b.ALAMAT_TOKO, a.TOTAL_SKOR,
+                                                            SUBSTRING(a.PERIODE_PENILAIAN, 1, 4) AS prTahun
+                                                            FROM DAFTAR_TOKO b JOIN PENILAIAN_KRITERIA a ON a.ID_TOKO = b.ID_TOKO";
+                                            $hasil = mysqli_query($con, $tampil1);
+                                            $no = 1;
+                                            while ($data = mysqli_fetch_array($hasil)) {
 
-                                            ?>
+                                           
+
+                                                ?>
                                                 <tr>
 
                                                     <td>
                                                         <center><?php echo $no ?></center>
-                                                    </td>      
+                                                    </td>
                                                     <td>
                                                         <?php echo @$data['NAMA_TOKO']; ?>
                                                     </td>
@@ -52,12 +61,15 @@ error_reporting(0);
                                                         <?php echo @$data['ALAMAT_TOKO']; ?>
                                                     </td>
                                                     <td>
-                                                        <?php // echo @$data['ALAMAT_TOKO']; ?>
+                                                        <center><?php echo @$data['TOTAL_SKOR']; ?></center>
                                                     </td>
-                                               
+                                                    <td>
+                                                        <center><?php echo @$data['prTahun']; ?></center>
+                                                    </td>
+
                                                 </tr>
                                             <?php
-                                                 $no++;
+                                                $no++;
                                             }
                                             ?>
                                         </tbody>

@@ -8,20 +8,20 @@ include "Header-Dash.php";
             <div class="page-wrapper">
                 <div class="page-body">
                     <div class="row">
-                        <!-- <div class="col-xl-3 col-md-6">
+                        <div class="col-xl-3 col-md-6">
                             <div class="card prod-p-card card-blue">
                                 <div class="card-body">
                                     <div class="row align-items-center m-b-30">
                                         <div class="col">
-                                            <h6 class="m-b-5 text-white">PSDM</h6>
+                                            <h6 class="m-b-5 text-white">JUMLAH TOKO</h6>
                                             <h3 class="m-b-0 f-w-700 text-white">
                                                 <?php
-                                                // $tampilkan5 = "select count(*) as hitungAnggota FROM PENGURUS";
-                                                // $str = mysqli_query($con, $tampilkan5);
-                                                // while ($data = mysqli_fetch_array($str)) {
-                                                //     echo $data['hitungAnggota'];
-                                                // }
-                                                ?> Orang
+                                                $tampilkan5 = "select count(*) as hitungToko FROM DAFTAR_TOKO";
+                                                $str = mysqli_query($con, $tampilkan5);
+                                                while ($data = mysqli_fetch_array($str)) {
+                                                    echo $data['hitungToko'];
+                                                }
+                                                ?> Toko
                                             </h3>
                                         </div>
                                         <div class="col-auto">
@@ -30,21 +30,21 @@ include "Header-Dash.php";
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
-                        <!-- <div class="col-xl-3 col-md-6">
+                        </div>
+                        <div class="col-xl-3 col-md-6">
                             <div class="card prod-p-card card-yellow">
                                 <div class="card-body">
                                     <div class="row align-items-center m-b-30">
                                         <div class="col">
-                                            <h6 class="m-b-5 text-white">Creative Campaign</h6>
+                                            <h6 class="m-b-5 text-white">JUMLAH BARANG</h6>
                                             <h3 class="m-b-0 f-w-700 text-white">
                                                 <?php
-                                                // $tampilkan5 = "select count(*) as hitungAnggota FROM PENGURUS";
-                                                // $str = mysqli_query($con, $tampilkan5);
-                                                // while ($data = mysqli_fetch_array($str)) {
-                                                //     echo $data['hitungAnggota'];
-                                                // }
-                                                // ?> Orang
+                                                $tampilkan6 = "select count(*) as hitungBarang FROM BARANG";
+                                                $str1 = mysqli_query($con, $tampilkan6);
+                                                while ($data1 = mysqli_fetch_array($str1)) {
+                                                    echo $data1['hitungBarang'];
+                                                }
+                                                // ?> Item
                                             </h3>
                                         </div>
                                         <div class="col-auto">
@@ -53,7 +53,7 @@ include "Header-Dash.php";
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                         <!-- <div class="col-xl-3 col-md-6">
                             <div class="card prod-p-card card-blue">
                                 <div class="card-body">

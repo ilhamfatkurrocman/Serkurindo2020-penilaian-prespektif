@@ -26,9 +26,10 @@ if (isset($_POST['insert'])) {
     $target         = $_POST['TARGET'];
     $rata           = $_POST['RATA'];
     $skor           = $_POST['SKOR'];
+    $totNilai       = $_POST['TOTAL_NILAI'];
 
     $tBobot = array_sum($bobot);
-    $tSkor = array_sum($skor);
+    // $tSkor = array_sum($skor);
 
     $get_id_toko = $_POST['ID_TOKO'];
 
@@ -37,7 +38,7 @@ if (isset($_POST['insert'])) {
             TARGET1, TARGET2, TARGET3, TARGET4, TARGET5, TARGET6, 
             RATA1, RATA2, RATA3, RATA4, RATA5, RATA6,
             SKOR1, SKOR2, SKOR3, SKOR4, SKOR5, SKOR6, TOTAL_SKOR, PERIODE_PENILAIAN)
-            VALUES ('$penilai_id','$get_id_toko','$bobot[0]','$bobot[1]','$bobot[2]','$bobot[3]','$bobot[4]','$bobot[5]','$tBobot','$target[0]','$target[1]','$target[2]','$target[3]','$target[4]','$target[5]','$rata[0]','$rata[1]','$rata[2]','$rata[3]','$rata[4]','$rata[5]','$skor[0]','$skor[1]','$skor[2]','$skor[3]','$skor[4]','$skor[5]','$tSkor','$dateGoo')";
+            VALUES ('$penilai_id','$get_id_toko','$bobot[0]','$bobot[1]','$bobot[2]','$bobot[3]','$bobot[4]','$bobot[5]','$tBobot','$target[0]','$target[1]','$target[2]','$target[3]','$target[4]','$target[5]','$rata[0]','$rata[1]','$rata[2]','$rata[3]','$rata[4]','$rata[5]','$skor[0]','$skor[1]','$skor[2]','$skor[3]','$skor[4]','$skor[5]','$totNilai','$dateGoo')";
 
     $qwr = mysqli_query($con, $sql);
     if ($qwr) {
