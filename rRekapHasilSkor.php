@@ -25,9 +25,6 @@ error_reporting(0);
                                                     <center>Nama Toko</center>
                                                 </th>
                                                 <th>
-                                                    <center>Alamat</center>
-                                                </th>
-                                                <th>
                                                     <center>Hasil Skor</center>
                                                 </th>
 

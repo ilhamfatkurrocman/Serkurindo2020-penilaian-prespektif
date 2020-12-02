@@ -54,7 +54,7 @@ error_reporting(0);
                                                                     ?></center>
                                                     </td> -->
                                                     <td>
-                                                       <center><?php echo $data['ID_TOKO']; ?></center>
+                                                        <center><?php echo $data['ID_TOKO']; ?></center>
                                                     </td>
                                                     <td>
                                                         <?php echo $data['NAMA_TOKO']; ?>
@@ -65,9 +65,8 @@ error_reporting(0);
                                                     <td style="padding-top:10px; padding-bottom:10px;">
                                                         <center>
 
-                                                            <a href="lapPenilaian.php">
-                                                            <!-- <a href="mDataBarang.php?ID_BARANG=<?php //echo $data['ID_BARANG']; ?>"> -->
-                                                                <!-- <input type="button" value="Edit" class="btn btn-warning"> -->
+                                                            <a href="lapPenilaian.php?gogogo=<?php echo $data['ID_TOKO']; ?>">
+
                                                                 <button type="submit" class="btn btn-primary btn-sm" name="aksi">
                                                                     <i class="fa fa-cog"></i> Lakukan Penilaian Kinerja
                                                                 </button>
