@@ -49,6 +49,11 @@ if (!isset($_SESSION['STATUS'])) {
     <link rel="stylesheet" type="text/css" href="admindek/files/assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="admindek/files/assets/css/widget.css">
 
+
+
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"> -->
+
     <!--ChartJS-->
     <link rel="stylesheet" type="text/css" href="admindek/Chartjs/Chart.min.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -403,7 +408,7 @@ if (!isset($_SESSION['STATUS'])) {
                                     <?php if ($_SESSION['STATUS'] == 1 || $_SESSION['STATUS'] == 3) { ?>
                                         <ul class="pcoded-item pcoded-left-item">
                                             <li class="">
-                                                <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                                <a href="mLaporan.php" class="waves-effect waves-dark">
                                                     <span class="pcoded-micon"><i class="feather icon-file"></i></span>
                                                     <span class="pcoded-mtext">Laporan</span>
                                                 </a>

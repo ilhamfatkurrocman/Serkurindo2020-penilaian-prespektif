@@ -25,31 +25,31 @@ error_reporting(0);
 														<center>Jenis Prespektif</center>
 													</th>
 													<th>
-														<center>Kriteria
+														<center>Kriteria</center>
 													</th>
 													<th>
-														<center>Bobot (%)
+														<center>Bobot (%)</center>
 													</th>
 													<th>
-														<center>Target (Opsional)
+														<center>Target (Opsional)</center>
 													</th>
 													<th>
-														<center>Minggu Ke-1
+														<center>Minggu Ke-1</center>
 													</th>
 													<th>
-														<center>Minggu Ke-2
+														<center>Minggu Ke-2</center>
 													</th>
 													<th>
-														<center>Minggu Ke-3
+														<center>Minggu Ke-3</center>
 													</th>
 													<th>
-														<center>Minggu Ke-4
+														<center>Minggu Ke-4</center>
 													</th>
 													<th>
-														<center>Nilai Rata - Rata
+														<center>Nilai Rata - Rata</center>
 													</th>
 													<th>
-														<center>Skor
+														<center>Skor</center>
 													</th>
 												</tr>
 											</thead>

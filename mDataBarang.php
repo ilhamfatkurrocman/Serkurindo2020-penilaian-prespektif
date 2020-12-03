@@ -148,7 +148,7 @@ error_reporting(0);
                                             while ($data = mysqli_fetch_array($hasil)) {
                                                 ?>
                                                 <tr>
-                                                    
+
                                                     <td>
                                                         <center><?php echo @$data['ID_BARANG']; ?></center>
                                                     </td>

@@ -886,4 +886,74 @@ UNION
 
 
 
+SELECT a.ID_TOKO as aa, b.ID_BARANG as vv,
+    (SELECT STOK
+    FROM STOK_BARANG
+    WHERE ID_BARANG = 'BR001' AND ID_TOKO = 'TK001'AND SUBSTRING(PERIODE_STOK, 1, 11) LIKE '%Minggu Ke-1%') as gg
 
+FROM DAFTAR_TOKO a JOIN STOK_BARANG b ON a.ID_TOKO = b.ID_TOKO
+WHERE a.ID_TOKO = 'TK001' 
+GROUP BY ID_BARANG
+
+
+SELECT ID_BARANG, STOK, PERIODE_STOK
+    FROM STOK_BARANG
+    WHERE ID_BARANG = 'BR001' AND ID_TOKO = 'TK001'AND SUBSTRING(PERIODE_STOK, 1, 11) LIKE '%Minggu Ke-1%'
+
+
+SELECT a.*, bar.STOK, b.ID_PASAR, b.M1, b.M2, b.M3, b.M4
+FROM penjualan_toko a JOIN PANGSA_PASAR b ON a.ID_BARANG = b.ID_BARANG
+JOIN STOK_BARANG bar ON bar.ID_STOK = bar.ID_STOK
+WHERE a.ID_TOKO = 'TK001' AND a.PERIODE_PENJUALAN LIKE '%Minggu Ke-1%' AND bar.PERIODE_STOK LIKE '%Minggu Ke-1%'
+GROUP BY a.ID_PENJUALAN, a.ID_BARANG
+
+SELECT a.*, b.ID_PASAR, b.M1, b.M2, b.M3, b.M4
+FROM penjualan_toko a JOIN PANGSA_PASAR b ON a.ID_BARANG = b.ID_BARANG
+WHERE a.ID_TOKO = 'TK001' AND a.PERIODE_PENJUALAN LIKE '%Minggu Ke-1%'
+
+
+
+
+
+
+
+
+            // =============================
+
+
+            if (isset($_GET['minggu']) && $_GET['minggu'] == 'm1') {
+                $StokDetifr01 = $_GET['minggu'];
+                $get_jmlStokDet = "SELECT ID_BARANG, STOK, PERIODE_STOK
+                                                                                FROM STOK_BARANG
+                                                                                WHERE ID_BARANG = '$dataPangsa' AND ID_TOKO = '$get_id_toko_penjualan' AND SUBSTRING(PERIODE_STOK, 1, 11) LIKE '%Minggu Ke-1%'";
+            } elseif (isset($_GET['minggu']) && $_GET['minggu'] == 'm2') {
+                $StokDetifr02 = $_GET['minggu'];
+                $get_jmlStokDet = "SELECT ID_BARANG, STOK, PERIODE_STOK
+                                                                                FROM STOK_BARANG
+                                                                                WHERE ID_BARANG = '$dataPangsa' AND ID_TOKO = '$get_id_toko_penjualan' AND SUBSTRING(PERIODE_STOK, 1, 11) LIKE '%Minggu Ke-2%'";
+            }
+
+            $goGetDetBarangStok = mysqli_query($con, $get_jmlStokDet);
+            while ($djmlBarDet = mysqli_fetch_array($goGetDetBarangStok)) {
+
+
+
+                echo  $get_jmlStokDet = $djmlBarDet['STOK'];
+                // =============================
+
+            }
+
+
+
+
+
+
+
+
+
+SELECT ID_TOKO as took, NAMA_TOKO, ALAMAT_TOKO,
+    (SELECT BOBOT1
+        FROM PENILAIAN_KRITERIA
+        WHERE ID_TOKO = took AND SUBSTRING(PERIODE_KELUHAN, 1, 11) LIKE '%Minggu Ke-1%') as qKel,
+
+FROM DAFTAR_TOKO

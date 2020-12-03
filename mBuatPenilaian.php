@@ -188,7 +188,6 @@ error_reporting(0);
                                                             FROM DAFTAR_TOKO";
                                             }
 
-
                                             $hasil = mysqli_query($con, $tampil1);
                                             // $no = 1;
                                             while ($data = mysqli_fetch_array($hasil)) {
@@ -255,12 +254,17 @@ error_reporting(0);
                                                                                 FROM penjualan_toko a JOIN PANGSA_PASAR b ON a.ID_BARANG = b.ID_BARANG
                                                                                 WHERE a.ID_TOKO = '$get_id_toko_penjualan' AND a.PERIODE_PENJUALAN LIKE '%Minggu Ke-4%'";
                                                     
+
                                                     }
+
+                                                    // ====================
                                                 
+
+                                                    $simpan_var_jml_barang = 0;
+
                                                     $goGet = mysqli_query($con, $get_penjualan_per_item);
                                                     while ($dataPangsa = mysqli_fetch_array($goGet)) {
                                                         
-
                                                         if (isset($_GET['minggu']) && $_GET['minggu'] == 'm1') {
                                                             $Goifr01 = $_GET['minggu'];
                                                             $get_jmlBaranag = "SELECT ptooko.ID_TOKO, count(ptooko.ID_BARANG) AS jmlTokBarang, ptooko.PERIODE_PENJUALAN
@@ -287,6 +291,7 @@ error_reporting(0);
                                                                                 FROM BARANG barr JOIN PENJUALAN_TOKO ptooko ON barr.ID_BARANG = ptooko.ID_BARANG
                                                                                 WHERE ptooko.PERIODE_PENJUALAN LIKE '%Minggu Ke-4%' AND ptooko.ID_TOKO = '$get_id_toko_penjualan'
                                                                                 GROUP BY ptooko.ID_TOKO, ptooko.PERIODE_PENJUALAN";
+
                                                         }                                                   
 
                                                             $goGetjmlBarang = mysqli_query($con, $get_jmlBaranag);
@@ -294,32 +299,100 @@ error_reporting(0);
 
                                                             // $iTok = $djmlBar['ID_TOKO']. ' ==  ';
                                                             $jBar = $djmlBar['jmlTokBarang'];
-                                                            // $asahsja = $djmlBar['PERIODE_PENJUALAN'];
                                                             
-                                                    
-                                                    $dataPangsa['ID_BARANG'];
-                                                    $pangPenjualan = $dataPangsa['JUMLAH_PENJUALAN'];
+            
+                                                        $get_id_barang_ya = $dataPangsa['ID_BARANG'];
 
-                                                    $pertama = $dataPangsa['M1']; 
-                                                    $hPangsaPasarM1 = $pangPenjualan / $pertama;
+                                                        // $get_id_toko_penjualan;
 
-                                                    $kedua = $dataPangsa['M2'];
-                                                    $hPangsaPasarM2 = $pangPenjualan / $kedua;
+                                                        $pangPenjualan = $dataPangsa['JUMLAH_PENJUALAN'];
 
-                                                    $tiga = $dataPangsa['M3']; 
-                                                    $hPangsaPasarM3 = $pangPenjualan / $tiga;
+                                                        $pertama = $dataPangsa['M1']. ' == '; 
+                                                        $hPangsaPasarM1 = $pangPenjualan / $pertama;
 
-                                                    $empat = $dataPangsa['M4']; 
-                                                    $hPangsaPasarM4 = $pangPenjualan / $empat;
+                                                        $kedua = $dataPangsa['M2'];
+                                                        $hPangsaPasarM2 = $pangPenjualan / $kedua;
 
-                                                    $varHasil += $hPangsaPasarM1; 
-                                                    $varHasi2 += $hPangsaPasarM2;
-                                                    $varHasi3 += $hPangsaPasarM3; 
-                                                    $varHasi4 += $hPangsaPasarM4;
+                                                        $tiga = $dataPangsa['M3']; 
+                                                        $hPangsaPasarM3 = $pangPenjualan / $tiga;
 
-                                                    }
+                                                        $empat = $dataPangsa['M4']; 
+                                                        $hPangsaPasarM4 = $pangPenjualan / $empat;
 
-                                                    $jmlBarangPdToko = $jBar;
+                                                        $varHasil += $hPangsaPasarM1; 
+                                                        $varHasi2 += $hPangsaPasarM2;
+                                                        $varHasi3 += $hPangsaPasarM3; 
+                                                        $varHasi4 += $hPangsaPasarM4;
+
+
+                                                        // =============================
+                                                        if (isset($_GET['minggu']) && $_GET['minggu'] == 'm1') {
+                                                            $StokDetifr01 = $_GET['minggu'];
+                                                            $varHasilStok = 0;
+
+                                                            $get_jmlStokDet = "SELECT ID_BARANG, STOK, PERIODE_STOK
+                                                                                FROM STOK_BARANG
+                                                                                WHERE ID_BARANG = '$get_id_barang_ya' AND ID_TOKO = '$get_id_toko_penjualan' AND SUBSTRING(PERIODE_STOK, 1, 11) LIKE '%Minggu Ke-1%'";
+                                                        } elseif (isset($_GET['minggu']) && $_GET['minggu'] == 'm2') {
+                                                            $StokDetifr02 = $_GET['minggu'];
+                                                            $varHasilStok = 0;
+
+                                                            $get_jmlStokDet = "SELECT ID_BARANG, STOK, PERIODE_STOK
+                                                                                FROM STOK_BARANG
+                                                                                WHERE ID_BARANG = '$get_id_barang_ya' AND ID_TOKO = '$get_id_toko_penjualan' AND SUBSTRING(PERIODE_STOK, 1, 11) LIKE '%Minggu Ke-2%'";
+                                                        } elseif (isset($_GET['minggu']) && $_GET['minggu'] == 'm3') {
+                                                            $StokDetifr03 = $_GET['minggu'];
+                                                            $varHasilStok = 0;
+
+                                                            $get_jmlStokDet = "SELECT ID_BARANG, STOK, PERIODE_STOK
+                                                                                FROM STOK_BARANG
+                                                                                WHERE ID_BARANG = '$get_id_barang_ya' AND ID_TOKO = '$get_id_toko_penjualan' AND SUBSTRING(PERIODE_STOK, 1, 11) LIKE '%Minggu Ke-3%'";
+                                                        } elseif (isset($_GET['minggu']) && $_GET['minggu'] == 'm4') {
+                                                            $StokDetifr04 = $_GET['minggu'];
+                                                            $varHasilStok = 0;
+
+                                                            $get_jmlStokDet = "SELECT ID_BARANG, STOK, PERIODE_STOK
+                                                                                FROM STOK_BARANG
+                                                                                WHERE ID_BARANG = '$get_id_barang_ya' AND ID_TOKO = '$get_id_toko_penjualan' AND SUBSTRING(PERIODE_STOK, 1, 11) LIKE '%Minggu Ke-4%'";
+                                                        }
+
+                                                        $goGetDetBarangStok = mysqli_query($con, $get_jmlStokDet);
+                                                        while ($djmlBarDet = mysqli_fetch_array($goGetDetBarangStok)) {
+
+                                                            $pangPenjualan = $dataPangsa['JUMLAH_PENJUALAN'];
+                                                            $get_jmlStokDet = $djmlBarDet['STOK'];
+
+                                                            $hitungDetailStok =  $pangPenjualan / $get_jmlStokDet . ' <br><br> '; //penjualan / stok
+
+                                                        $varHitungLagi += $hitungDetailStok; 
+
+                                                            $simpan_var_jml_barang = $jBar;
+
+                                                        $fin = $varHitungLagi / $simpan_var_jml_barang;
+                                                       
+                                                            
+                                                        }
+
+                                                        
+                                                     
+
+                                                       
+
+                                                        // ==============================
+
+                                            }
+
+      
+                                                 $var_totalbr123 = $varHitungLagi;
+                                               
+
+                                                   $jmlBarangPdToko = $jBar;
+
+
+                                                    $kaliJmlBarang = $var_totalbr123 / $jmlBarangPdToko;
+                                                    $Godigit = sprintf("%.2f", $kaliJmlBarang);
+                                                    $persen = $Godigit * 100; // HASIL PRESENTASE PRODUK TERJUALN (PRES BISNIS INTERNAL)
+
 
                                                     // === Pangsa Pasar Hasil ===
                                                     if ($ifr01 == 'm1') {
@@ -385,7 +458,7 @@ error_reporting(0);
 
                                                     // === Kehilangan Produk ===
                                                     $jmlHil = $data['qHilang'];
-                                                   echo $jmlSto = $data['qStok'];
+                                                    $jmlSto = $data['qStok'];
                                                     $mPH = $jmlHil / $jmlSto * 100;
                                                     $PH = round($mPH);
 
@@ -453,7 +526,7 @@ error_reporting(0);
                                                                                     </div>
                                                                                     <div class="col-sm-6"><label class="form-control-label">Penilaian Rata - Rata Produk Terjual</label>
                                                                                         <div class="input-group">
-                                                                                            <input type="text" class="form-control form-control-center" placeholder="0" name="RRTERJUAL" value="<?php  //echo $getGoHasilYa; 
+                                                                                            <input type="text" class="form-control form-control-center" placeholder="0" name="RRTERJUAL" value="<?php  echo $persen; 
                                                                                                                                                                                                         ?>" readonly>
                                                                                             <span class="input-group-append" id="basic-addon2">
                                                                                                 <label class="input-group-text">%</label>
@@ -519,6 +592,7 @@ error_reporting(0);
                                                     // $no++;
                                                 }
                                             }
+                                            // echo $varHitungLagi;
                                             ?>
                                         </tbody>
                                     </table>
