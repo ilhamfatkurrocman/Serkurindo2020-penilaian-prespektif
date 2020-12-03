@@ -39,14 +39,31 @@ error_reporting(0);
                                         <tbody>
                                             <?php
 
-                                            @$tampil1 = "SELECT a.ID_PENILAIAN_KRITERIA, b.NAMA_TOKO, b.ALAMAT_TOKO, a.TOTAL_SKOR,
+                                            @$tampil1 = "SELECT a.ID_PENILAIAN_KRITERIA, b.NAMA_TOKO, b.ALAMAT_TOKO, a.TOTAL_SKOR, a.ID_TOKO as idTo,
                                                             SUBSTRING(a.PERIODE_PENILAIAN, 1, 4) AS prTahun
                                                             FROM DAFTAR_TOKO b JOIN PENILAIAN_KRITERIA a ON a.ID_TOKO = b.ID_TOKO";
                                             $hasil = mysqli_query($con, $tampil1);
                                             $no = 1;
+                                            $var_sum = 0;
                                             while ($data = mysqli_fetch_array($hasil)) {
 
-                                           
+                                                $get_idd = $data['idTo'];
+
+                                                for ($k=0; $k<=6; $k++) {
+
+
+                                                    $qq = "SELECT RATA$k as ssRATA
+                                                                FROM PENILAIAN_KRITERIA WHERE ID_TOKO = '$get_idd'";
+
+                                                    $hasilqq = mysqli_query($con, $qq);
+                                                    // $no = 1;
+                                                    $dataqq = mysqli_fetch_array($hasilqq);
+
+                                                    $var_sum += $dataqq['ssRATA'];
+
+                                                    // echo $k;
+
+                                                }
 
                                                 ?>
                                                 <tr>
@@ -61,7 +78,7 @@ error_reporting(0);
                                                         <?php echo @$data['ALAMAT_TOKO']; ?>
                                                     </td>
                                                     <td>
-                                                        <center><?php echo @$data['TOTAL_SKOR']; ?></center>
+                                                        <center><?php echo $var_sum; ?></center>
                                                     </td>
                                                     <td>
                                                         <center><?php echo @$data['prTahun']; ?></center>

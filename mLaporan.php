@@ -50,12 +50,12 @@ error_reporting(0);
                                     </div>
                                 <?php } ?>
 
-                                <form action="" method="POST" class="form-horizontal">
+                                <form action="cetak_laporan.php" method="GET" class="form-horizontal">
                                     <div class="form-group row">
                                         <div class="col-sm-4">
                                             <label class="form-control-label">Kode Penilaian Kriteria</label>
-                                            <select name="ID_PENILAIAN_KRITERIA" id="select" class="form-control">
-                                                <option value="0" <?php if (!isset($_GET['ID_PENILAIAN_KRITERIA'])) {
+                                            <select name="ID_PENILAIAN_KRITERIA" id="select" class="form-control" required>
+                                                <option value="" <?php if (!isset($_GET['ID_PENILAIAN_KRITERIA'])) {
                                                                         echo "selected";
                                                                         // code...
                                                                     } ?>>Pilih Kode</option>
@@ -69,8 +69,8 @@ error_reporting(0);
                                         </div>
                                         <div class="col-sm-4">
                                             <label class="form-control-label">Periode</label>
-                                            <select name="PERIODE_PENILAIAN" id="select" class="form-control">
-                                                <option value="0" <?php if (!isset($_GET['PERIODE_PENILAIAN'])) {
+                                            <select name="PERIODE_PENILAIAN" id="select" class="form-control" required>
+                                                <option value="" <?php if (!isset($_GET['PERIODE_PENILAIAN'])) {
                                                                         echo "selected";
                                                                         // code...
                                                                     } ?>>Pilih Bulan</option>
@@ -84,16 +84,16 @@ error_reporting(0);
                                         </div>
                                         <div class="col-sm-4">
                                             <label class="form-control-label">Toko</label>
-                                            <select name="ID_TOKO" id="select" class="form-control">
-                                                <option value="0" <?php if (!isset($_GET['ID_TOKO'])) {
+                                            <select name="ID_TOKO" id="select" class="form-control" required>
+                                                <option value="" <?php if (!isset($_GET['ID_TOKO'])) {
                                                                         echo "selected";
                                                                         // code...
                                                                     } ?>>Pilih Toko</option>
                                                 <?php $str = mysqli_query($con, "SELECT b.NAMA_TOKO, a.* FROM PENILAIAN_KRITERIA a JOIN DAFTAR_TOKO b ON a.ID_TOKO = b.ID_TOKO");
                                                 while ($data = mysqli_fetch_array($str)) { ?>
-                                                    <option value="<?php echo @$data[0]; ?>" <?php if (@$row['ID_TOKO'] == @$data[0]) {
+                                                    <option value="<?php echo @$data[2]; ?>" <?php if (@$row['ID_TOKO'] == @$data[2]) {
                                                                                                         echo "selected";
-                                                                                                    } ?>> <?php echo @$data[0]; ?></option>
+                                                                                                    } ?>> <?php echo @$data[2]; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -121,11 +121,7 @@ error_reporting(0);
 
                                 </form>
 
-                                <a href="export_laporan.php">
-                                    <button type="submit" class="btn btn-primary btn-sm" name="insert" value="insert">
-                                        <i class="fa fa-dot-circle-o"></i> Test
-                                    </button>
-                                </a>
+                              
                             </div>
                         </div>
 

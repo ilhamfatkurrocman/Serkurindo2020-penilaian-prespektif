@@ -176,18 +176,7 @@ error_reporting(0);
 												}
 												?>
 
-												<tr>
-													<td colspan="2">
-														<center>TOTAL PENILAIAN KINERJA</center>
-													</td>
-													<td></td>
-													<td colspan="6">
-														<center>
-															<input type=text id="TOTAL_NILAI" name="TOTAL_NILAI" placeholder="0" value="" class="form-control form-control-center" require>
-														</center>
-													</td>
-													<td></td>
-												</tr>
+												
 											</tbody>
 										</table>
 
